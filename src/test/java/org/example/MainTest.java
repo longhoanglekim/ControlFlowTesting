@@ -1,6 +1,9 @@
 package org.example;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+
 public class MainTest {
     @Test
     public void bound_test_valid_email() {
@@ -26,4 +29,26 @@ public class MainTest {
         Assert.assertEquals(false, Main.isValidEmail(" ab c@def.gh")); //T11
         Assert.assertEquals(false, Main.isValidEmail("abcd@efg.hjkl.mno.uvt")); //T12
     }
+
+    @Test
+    public void testC2_valid_email() {
+        Assert.assertTrue(Main.isValidEmail("example@example.com")); // Ca kiểm thử 1
+        Assert.assertFalse(Main.isValidEmail("exampleexample.com")); // Ca kiểm thử 2
+        Assert.assertFalse(Main.isValidEmail("example@")); // Ca kiểm thử 3
+        Assert.assertFalse(Main.isValidEmail("@example.com")); // Ca kiểm thử 4
+        Assert.assertFalse(Main.isValidEmail("a@b")); // Ca kiểm thử 5
+
+        // Ca kiểm thử 6: Email dài (hơn 320 ký tự)
+        StringBuilder longEmail = new StringBuilder("a@example.com");
+        for (int i = 0; i < 317; i++) {
+            longEmail.insert(1, "@");
+        }
+       Assert.assertFalse(Main.isValidEmail(longEmail.toString())); // Ca kiểm thử 6
+
+        Assert.assertFalse(Main.isValidEmail("example@com.")); // Ca kiểm thử 7
+        Assert.assertFalse(Main.isValidEmail("example @example.com")); // Ca kiểm thử 8
+
+    }
+
+
 }
