@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MainTest {
     @Test
@@ -32,7 +33,7 @@ public class MainTest {
 
     @Test
     public void testC2_valid_email() {
-        Assert.assertTrue(Main.isValidEmail("example@example.com")); // Ca kiểm thử 1
+        assertTrue(Main.isValidEmail("example@example.com")); // Ca kiểm thử 1
         Assert.assertFalse(Main.isValidEmail("exampleexample.com")); // Ca kiểm thử 2
         Assert.assertFalse(Main.isValidEmail("example@")); // Ca kiểm thử 3
         Assert.assertFalse(Main.isValidEmail("@example.com")); // Ca kiểm thử 4
@@ -47,7 +48,22 @@ public class MainTest {
 
         Assert.assertFalse(Main.isValidEmail("example@com.")); // Ca kiểm thử 7
         Assert.assertFalse(Main.isValidEmail("example @example.com")); // Ca kiểm thử 8
+    }
 
+
+    @Test
+    public void test_all_uses_valid_email() {
+        assertFalse(Main.isValidEmail("Abc")); // false
+        assertFalse(Main.isValidEmail("abcd@")); // false
+        assertFalse(Main.isValidEmail("abcde@")); // false
+        assertFalse(Main.isValidEmail("@abcde")); // false
+        assertFalse(Main.isValidEmail("a@b")); // false
+        assertFalse(Main.isValidEmail("a@bcd")); // false
+        assertTrue(Main.isValidEmail("abc@cde.ef")); // true
+        assertFalse(Main.isValidEmail("abc@")); // false
+        assertFalse(Main.isValidEmail("abcd@efg")); // false
+        assertFalse(Main.isValidEmail("ab cd@efg.jk")); // false
+        assertFalse(Main.isValidEmail("abcd@efgh")); // false
     }
 
 
